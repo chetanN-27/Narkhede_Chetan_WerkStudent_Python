@@ -1,79 +1,69 @@
+# Data extractor for PDF invoices
 
-# WerkStudent_Python
+InvoiceData Extractor is a tool for extracting  invoice date and total amount from PDFs. The application then generates an Excel file and a CSV file for further analysis and reporting. The tool also supports handling various currencies and date formats.
 
-## Overview
+### Brief Overview of the Tool
 
-This repository contains the interview task for the WerkStudent position in Python. The goal is to collect data from two sample invoices, create an Excel file with two sheets, and generate a CSV file. Additionally, an executable file should be provided to run the code.
+1. **PDF Input**:  
+   - The tool reads all invoice PDFs in the base folder.
 
-## Task Details
+2. **Data Extraction**:  
+   - Extracts the invoice date and total amount, handling both tables and fallback text extraction.
 
-1. **Data Extraction**:
-    - Extract specific values from three sample invoices.
-    - For Sample 1, extract the value shown in the provided image.
-    - <img width="289" alt="image" src="https://github.com/user-attachments/assets/0cf000ff-c305-4ffe-beb4-1c02a04d06b6" />
-    - For Samples 2, extract the value shown in the provided image.
-    - <img width="497" alt="image" src="https://github.com/user-attachments/assets/ea6eb368-604d-4dd4-9235-fbc8ec36d275" />
+3. **Data Cleaning and Conversion**:  
+   - Normalizes the date format to `DD/MM/YYYY` and converts amounts to Euros if required.
 
-2. **Excel File Creation**:
-    - Create an Excel file with two sheets:
-        - **Sheet 1**: Contains three columns - File Name, Date (scraped from the document), and Value.
-        - **Sheet 2**: Contains a pivot table with the date and value sum, and also by document name.
+4. **File Generation**:  
+   - **Excel Output**: Creates an `Invoices.xlsx`.
+   - **CSV Output**: Creates a `Invoices.csv` in semicolon-separated format for analysis.
 
-3. **CSV File Creation**:
-    - Create a CSV file with all the data, including headers, and use a semicolon (;) as the separator.
-
-4. **Executable File**:
-    - Provide an executable file (.exe) that can run the code if the files are in the same folder.
-
-5. **Fork Creation**:
-    - Create a fork of this repository named `LastName_FirstName_WerkStudent_Python` (e.g., `Shovon_Golam_WerkStudent_Python`).
-    - Upload your code to this branch. No need to submit a pull request; the fork will be checked directly.
-
-6. **Documentation**:
-    - Include an explanation in the README file that a non-technical person can understand.
-    - Ensure the code is documented so that a technical person can understand it.
-
-7. **Problem Reporting**:
-    - If you face any problems or find it impossible to complete a task, document the issue in the README file of your branch. Explain what the problem was and why you were unable to complete it.
+5. **Output**:  
+   - Both Excel and CSV files are stored in the same folder as the input PDFs.
 
 
-## How It Works
+### Outputs from the Code
 
-1. **Data Extraction**:
-    - The script reads the sample invoices and extracts the required values.
-    - The extracted data is stored in variables for further processing.
+The tool generates the following files:
 
-2. **Excel File Creation**:
-    - The script creates an Excel file with two sheets.
-    - Sheet 1 contains the file name, extracted data, and value.
-    - Sheet 2 contains a pivot table summarizing the data by date and document name.
+1. **Invoices.xlsx**:
+   - **Sheet 1: Raw Data**: Contains columns for:
+     - **File Name**: Name of the PDF file.
+     - **Date**: Extracted date in `DD/MM/YYYY` format.
+     - **Total (EUR)**: Total amount in EUR after conversion.
+   - **Sheet 2: Pivot Table**: A summary table aggregating total amounts by date and file name.
 
-3. **CSV File Creation**:
-    - The script generates a CSV file with the extracted data, including headers, and uses a semicolon as the separator.
-
-4. **Executable File**:
-    - An executable file is provided to run the entire code. Ensure the sample invoices are in the same folder as the executable file.
-
-5. **Requirements File**:
-    -A requirements.txt file is included to create the environment needed to run the code
-
-## Running the Code
-
-1. Place the sample invoices in the same folder as the executable file.
-2. Run the executable file to execute the code and generate the Excel and CSV files.
+2. **Invoices.csv**:
+   - Contains the same data as **Sheet 1** in the Excel file but formatted with semicolon separators (`;`).
 
 
-## Documentation
+### Steps to Run
 
-- The README file contains a non-technical explanation of the code.
-- The code is documented with comments to help technical users understand its functionality.
-
-## Problem Reporting
-
-- If you face any problems or find it impossible to complete a task, document the issue in the README file of your branch. Explain what the problem was and why you were unable to complete it.
-
-## Timeline
-
-- The time limit for this task is 9 January 2025. 
+1. Place the PDF files and the executable in the same folder.
+2. Double-click the `.exe` file to run the tool.
+3. The tool will automatically process all PDFs in the folder and generate output.
 
 
+### Tool Capabilities and Considerations (SWOT Analysis)
+
+**Strengths:**  
+1. Supports multiple date formats and currencies, normalizing them for consistency.  
+2. Extraction process checks for tables first and falls back to text-based extraction, increasing reliability.  
+
+**Weaknesses:**  
+1. Currently supports only English and could benefit from improved handling of highly complex PDFs, offering opportunities to expand language support and enhance accuracy.
+2. Uses current exchange rates instead of rates on actual invoice dates for currency conversion.  
+3. The executable file is designed to run only on Windows OS.
+
+**Opportunities:**  
+1. Integrate real-time Forex data to convert non-EUR currencies to EUR using an API like Open Exchange Rates, improving conversion accuracy based on exchange rates on specific invoice dates. 
+2. Leverage advanced AI-based tools like LlamaIndex's SmartPDFLoader to enhance PDF data extraction, for better handling of complex and poorly structured invoices, ensuring more accurate data retrieval.
+3. The tool can be adapted and built for different operating systems, broadening its usability across diverse environments.
+
+**Threats:**  
+1. In cases of incomplete extraction, downstream calculations and summaries might require further refinement to ensure accuracy.
+
+### Troubleshooting
+
+- Ensure PDFs are in the same folder as the executable.
+- Check for corrupted PDFs.
+- Verify executable permissions.
